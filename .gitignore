@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Env and secrets (keep .env.example tracked)
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel
+
+# Hardhat / Solidity
+cache/
+artifacts/
+typechain-types/
+coverage/
+coverage.json
+
+# Logs and debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / editor
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*.swo
+*~
+
+# Testing
+.turbo
+*.tsbuildinfo
+
+# Misc
+*.pem
+*.local
