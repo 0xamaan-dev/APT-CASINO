@@ -1,0 +1,13 @@
+{
+  "network": "initia-testnet",
+  "chainId": "2124225178762456",
+  "deployer": "0x6E932AD4F0E99E0e49059149C035194cc352BE52",
+  "deploymentTime": "2026-04-24T09:31:06.201Z",
+  "contracts": {
+    "gameLogger": {
+      "address": "0xcB559740E47eed913fDa1fFCecAd0D694dfA6271",
+      "transactionHash": "0x4db31b772c301319331b37a1420a963cdead28f21cdc6c3386ecffe8e9a4392f",
+      "blockNumber": 17162761
+    }
+  }
+}
