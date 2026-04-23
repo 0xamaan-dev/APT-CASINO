@@ -1,0 +1,39 @@
+{
+  "abi": [
+    {
+      "inputs": [{ "name": "owner", "type": "address" }],
+      "name": "balanceOf",
+      "outputs": [{ "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "owner", "type": "address" }],
+      "name": "getTokensByOwner",
+      "outputs": [{ "name": "", "type": "uint256[]", "internalType": "uint256[]" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "tokenId", "type": "uint256" }],
+      "name": "getTokenMetadata",
+      "outputs": [
+        {
+          "name": "",
+          "type": "tuple",
+          "components": [
+            { "name": "gameType", "type": "string" },
+            { "name": "betAmount", "type": "uint256" },
+            { "name": "result", "type": "string" },
+            { "name": "payout", "type": "uint256" },
+            { "name": "timestamp", "type": "uint256" },
+            { "name": "logId", "type": "bytes32" }
+          ],
+          "internalType": "struct APTCasinoNFT.GameMetadata"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}
