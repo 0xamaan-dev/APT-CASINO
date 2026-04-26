@@ -2,8 +2,8 @@
 
 /**
  * Initia hackathon: native feature `auto-signing` (InterwovenKit).
- * Lets users enable session-style signing on Initia L1 (initiation-2) per InterwovenKit TESTNET config.
- * EVM casino flows remain on wagmi; this complements the required Initia UX stack.
+ * Lets users enable session-style signing in the Initia testnet wallet UX.
+ * EVM casino flows run on `evm-1` via wagmi; this complements the required Initia UX stack.
  */
 import { TESTNET, useInterwovenKit } from "@/config/interwovenKit";
 import { useAccount } from "wagmi";

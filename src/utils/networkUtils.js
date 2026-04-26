@@ -1,7 +1,10 @@
 ﻿// Initia EVM Testnet — wallet add/switch helpers
 import { initiaTestnet } from '@/config/chains';
 
-export { getInitiaL1AccountExplorerUrl } from '@/config/initiaTestnetConfig';
+export {
+  getInitiaL1AccountExplorerUrl,
+  getInitiaEvmAccountExplorerOverviewUrl,
+} from '@/config/initiaTestnetConfig';
 
 export const INITIA_TESTNET_CONFIG = {
   chainId: '0x' + (2124225178762456n).toString(16),

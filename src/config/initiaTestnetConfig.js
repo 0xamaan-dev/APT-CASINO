@@ -29,8 +29,8 @@ export const initiaTestnetConfig = {
   testnet: true,
 };
 
-/** Initia L1 testnet on [Initia Scan](https://scan.testnet.initia.xyz) — use for EOA / account pages (e.g. casino treasury). */
-export const initiaL1TestnetScanBase = 'https://scan.testnet.initia.xyz/initiation-2';
+/** Initia EVM testnet (`evm-1`) account pages on [Initia Scan](https://scan.testnet.initia.xyz/evm-1). */
+export const initiaL1TestnetScanBase = 'https://scan.testnet.initia.xyz/evm-1';
 
 export const initiaTestnetTokens = {
   INIT: {
@@ -50,8 +50,17 @@ export const getInitiaExplorerAddressUrl = (address) => {
   return `${initiaTestnetConfig.blockExplorers.default.url}/accounts/${address}`;
 };
 
-/** Account page on Initia L1 testnet (`initiation-2`), e.g. treasury EOA. */
+/** Account page on Initia EVM testnet (`evm-1`). */
 export const getInitiaL1AccountExplorerUrl = (address) =>
   `${initiaL1TestnetScanBase}/accounts/${address}`;
+
+/**
+ * EVM account **overview** on [Initia Scan](https://scan.testnet.initia.xyz/evm-1) (`…/overview`).
+ * `accountId` may be `init1…` or `0x…` depending on how the explorer routes the account.
+ */
+export function getInitiaEvmAccountExplorerOverviewUrl(accountId) {
+  const base = initiaTestnetConfig.blockExplorers.default.url;
+  return `${base}/accounts/${accountId}/overview`;
+}
 
 export default initiaTestnetConfig;

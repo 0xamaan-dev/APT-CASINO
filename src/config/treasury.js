@@ -1,10 +1,22 @@
-﻿import { getInitiaL1AccountExplorerUrl } from '@/config/initiaTestnetConfig';
+﻿import { getInitiaEvmAccountExplorerOverviewUrl } from '@/config/initiaTestnetConfig';
 
-/** Treasury — Initia EVM Testnet (EOA; L1 account view on Initia Scan `initiation-2`). */
+/** Treasury — Initia EVM Testnet (signing uses `0x…`; Initia Scan account may use `init1…`). */
 
 /** Default public treasury EOA (Initia testnet). Override via env in production. */
 export const DEFAULT_INITIA_TREASURY_ADDRESS =
   '0x6E932AD4F0E99E0e49059149C035194cc352BE52';
+
+/** Default Initia Scan EVM account id for treasury overview (`init1…` or `0x…`). */
+export const DEFAULT_INITIA_TREASURY_ACCOUNT_SCAN_ID =
+  'init1d6fj448sax0qujg9j9yuqdgefnp490jj0znsnx';
+
+function getTreasuryAccountScanId() {
+  return (
+    process.env.NEXT_PUBLIC_INITIA_TREASURY_ACCOUNT_SCAN_ID ||
+    process.env.INITIA_TREASURY_ACCOUNT_SCAN_ID ||
+    DEFAULT_INITIA_TREASURY_ACCOUNT_SCAN_ID
+  );
+}
 
 export const TREASURY_CONFIG = {
   ADDRESS:
@@ -44,7 +56,7 @@ export const getTreasuryInfo = () => ({
   chainId: TREASURY_CONFIG.NETWORK.CHAIN_ID,
 });
 
-/** Initia Scan (L1 `initiation-2`) URL for the configured treasury address. */
+/** Initia Scan — EVM testnet treasury account overview (`/evm-1/accounts/…/overview`). */
 export function getTreasuryInitiaScanUrl() {
-  return getInitiaL1AccountExplorerUrl(TREASURY_CONFIG.ADDRESS);
+  return getInitiaEvmAccountExplorerOverviewUrl(getTreasuryAccountScanId());
 }
