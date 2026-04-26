@@ -18,7 +18,7 @@ async function testMetadataApi(tokenId) {
 
     const protocol = "http";
     const host = "localhost:3000";
-    const baseUrl = "https://apt-casino-credit-coin.vercel.app"; // Fallback
+    const baseUrl = "https://apt-casino-initia.vercel.app"; // Fallback (override via NEXT_PUBLIC_APP_URL)
 
     const safeBaseUrl = baseUrl.replace(/\/$/, '');
     const nftImagePath = "/nft/nft.png"; // Mock path

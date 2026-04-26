@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 // Using Next.js public asset reference instead of import
 import { FaExternalLinkAlt, FaImage } from "react-icons/fa";
+import { getPublicAppOrigin } from "@/config/externalLinks";
 
 const GameHistory = ({ gameHistory }) => {
   const [activeTab, setActiveTab] = useState("my-bet");
@@ -148,7 +149,7 @@ const GameHistory = ({ gameHistory }) => {
                         <div className="flex items-center gap-2">
                           {item.nftImagePath && !imageErrors[item.id] ? (
                             <Image
-                              src={`https://apt-casino-credit-coin.vercel.app${item.nftImagePath}`}
+                              src={`${getPublicAppOrigin()}${item.nftImagePath}`}
                               alt={`NFT #${item.nftTokenId}`}
                               width={24}
                               height={24}

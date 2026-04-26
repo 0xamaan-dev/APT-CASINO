@@ -1,4 +1,17 @@
 /**
+ * Canonical production app origin (Vercel). Override with NEXT_PUBLIC_APP_URL for forks / staging.
+ */
+export const PUBLIC_APP_ORIGIN_DEFAULT = "https://apt-casino-initia.vercel.app";
+
+export function getPublicAppOrigin() {
+  const fromEnv =
+    typeof process !== "undefined" && process.env?.NEXT_PUBLIC_APP_URL
+      ? String(process.env.NEXT_PUBLIC_APP_URL).replace(/\/$/, "")
+      : "";
+  return fromEnv || PUBLIC_APP_ORIGIN_DEFAULT;
+}
+
+/**
  * Public marketing and deck URLs.
  * Override the pitch deck in the UI with NEXT_PUBLIC_PITCH_DECK_URL (optional).
  */

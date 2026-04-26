@@ -5,7 +5,8 @@ import initiaTestnetConfig from '@/config/initiaTestnetConfig';
 /**
  * NFT Metadata API - ERC-721 compliant metadata endpoint
  * Base URL: {NEXT_PUBLIC_APP_URL}/api/nft/{tokenId}
- * Set as NFT_BASE_URI in InitiaGameLogger / APTCasinoNFT contracts.
+ * Production example: https://apt-casino-initia.vercel.app/api/nft/{tokenId}
+ * Set NEXT_PUBLIC_APP_URL on Vercel (and NFT_BASE_URI) for canonical on-chain metadata links.
  */
 
 const NFT_CONTRACT_ADDRESS =

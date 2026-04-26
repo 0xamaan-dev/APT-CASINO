@@ -4,4 +4,6 @@ This repo is **Initia EVM Testnet**–focused. Record verified contract addresse
 
 Repository: https://github.com/0xamaan-dev/APT-CASINO
 
+Live app (Vercel): https://apt-casino-initia.vercel.app
+
 Pitch deck (Figma): https://www.figma.com/deck/MaNXzpdQG9Xu00r9LHuT1w/APT-Casino-Initia?node-id=1-1812&p=f&t=lw2ZfabwT0TwgRfK-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1

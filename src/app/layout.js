@@ -6,11 +6,17 @@ import Footer from "@/components/Footer";
 import GlobalWalletManager from "@/components/GlobalWalletManager";
 import NetworkSwitcher from "@/components/NetworkSwitcher";
 import GlobalNotificationSystem from "@/components/GlobalNotificationSystem";
+import { PUBLIC_APP_ORIGIN_DEFAULT } from "@/config/externalLinks";
 
 
 const inter = Inter({ subsets: ["latin"] });
 
+const appOrigin = (
+  process.env.NEXT_PUBLIC_APP_URL || PUBLIC_APP_ORIGIN_DEFAULT
+).replace(/\/$/, "");
+
 export const metadata = {
+  metadataBase: new URL(`${appOrigin}/`),
   title: "APT Casino",
   description: "APT Casino",
 };
