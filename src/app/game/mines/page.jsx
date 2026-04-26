@@ -16,7 +16,6 @@ import { FaCrown, FaHistory, FaTrophy, FaInfoCircle, FaChartLine, FaBomb, FaDisc
 import { GiMining, GiDiamonds, GiCardRandom, GiMineExplosion, GiCrystalGrowth, GiChestArmor, GiGoldBar } from "react-icons/gi";
 import { HiLightningBolt, HiOutlineTrendingUp, HiOutlineChartBar } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "next-themes";
 import useWalletStatus from '@/hooks/useWalletStatus';
 import EthereumConnectWalletButton from '@/components/EthereumConnectWalletButton';
 import Image from "next/image";
@@ -66,9 +65,6 @@ export default function Mines() {
 
   // CreditCoin Game Logger
   const { logGame, isLogging, getExplorerUrl, getHistory } = useCreditcoinGameLogger();
-
-  // Theme
-  const { theme } = useTheme();
 
   const mergeHistoryEntries = (currentEntries, fetchedEntries) => {
     const fetchedKeys = new Set(

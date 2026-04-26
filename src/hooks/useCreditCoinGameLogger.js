@@ -3,6 +3,7 @@ import { useAccount, useWalletClient, usePublicClient } from 'wagmi';
 import { ethers } from 'ethers';
 import { InitiaGameLogger } from '../services/CreditCoinGameLogger';
 import { getInitiaExplorerTxUrl } from '../config/initiaTestnetConfig';
+import { getInitiaNftContractAddress } from '../config/contracts';
 import APTCasinoNFT_ABI from '../abis/APTCasinoNFT.json';
 
 /**
@@ -162,7 +163,7 @@ export function useInitiaGameLogger() {
   const getNFTsByOwner = useCallback(async () => {
     if (!address) return [];
     try {
-      const nftContractAddress = process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS;
+      const nftContractAddress = getInitiaNftContractAddress();
       if (!nftContractAddress) return [];
       const { provider } = await getEthersProviderAndSigner();
       if (!provider) return [];
@@ -193,7 +194,7 @@ export function useInitiaGameLogger() {
   const getNFTCount = useCallback(async () => {
     if (!address) return 0;
     try {
-      const nftContractAddress = process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS;
+      const nftContractAddress = getInitiaNftContractAddress();
       if (!nftContractAddress) return 0;
       const { provider } = await getEthersProviderAndSigner();
       if (!provider) return 0;

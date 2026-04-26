@@ -2,9 +2,10 @@
 import { useState } from "react";
 import { FaExternalLinkAlt, FaImage } from "react-icons/fa";
 import Image from "next/image";
+import { getInitiaGameLoggerAddress, getInitiaNftContractAddress } from "@/config/contracts";
 
-const GAME_LOGGER = "0xcB559740E47eed913fDa1fFCecAd0D694dfA6271";
-const NFT_CONTRACT = "0x737165fE3834e07E0b053900BcE3C18Add9F2c7D";
+const GAME_LOGGER = getInitiaGameLoggerAddress();
+const NFT_CONTRACT = getInitiaNftContractAddress();
 
 export default function GameHistory({ history }) {
   const [visibleCount, setVisibleCount] = useState(5);

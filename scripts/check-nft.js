@@ -3,7 +3,10 @@ require("dotenv").config();
 
 async function checkTokenURI() {
     const rpcUrl = "https://rpc.cc3-testnet.creditcoin.network";
-    const nftAddress = process.env.NFT_CONTRACT_ADDRESS || "0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7";
+    const nftAddress =
+      process.env.NFT_CONTRACT_ADDRESS ||
+      process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS ||
+      "0x737165fE3834e07E0b053900BcE3C18Add9F2c7D";
 
     console.log("Checking NFT at:", nftAddress);
     const provider = new ethers.JsonRpcProvider(rpcUrl);

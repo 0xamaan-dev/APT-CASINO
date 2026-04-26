@@ -1,15 +1,12 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { FaRobot, FaCog, FaBrain, FaChartLine, FaRegLightbulb, FaExternalLinkAlt, FaSyncAlt } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from 'next-themes';
-
 const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentMode, setCurrentMode] = useState('balanced'); // balanced, aggressive, conservative
   const [aiThinking, setAiThinking] = useState(false);
   const [lastAction, setLastAction] = useState(null);
   const [stats, setStats] = useState({ wins: 0, losses: 0, profit: 0, avgMultiplier: 0 });
-  const { theme } = useTheme();
 
   // AI Thinking Animation
   useEffect(() => {

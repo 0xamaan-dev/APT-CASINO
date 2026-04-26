@@ -4,8 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import GradientBorderButton from "./GradientBorderButton";
-import { FaGlobe, FaChevronDown, FaChevronUp, FaMobileAlt, FaLock, FaShieldAlt, FaCoins, FaFigma } from "react-icons/fa";
-import { getPitchDeckUrl, getPublicAppOrigin } from "@/config/externalLinks";
+import { FaGlobe, FaChevronDown, FaChevronUp, FaMobileAlt, FaLock, FaShieldAlt, FaCoins, FaFigma, FaYoutube } from "react-icons/fa";
+import { getPitchDeckUrl, getPublicAppOrigin, getDemoVideoUrl } from "@/config/externalLinks";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -18,6 +18,7 @@ export default function Footer() {
     { name: "Telegram", url: "https://telegram.org", icon: "/icons/telegram.svg" },
     { name: "GitHub", url: "https://github.com/0xamaan-dev/APT-CASINO", icon: "/icons/github.svg" },
     { name: "Live app", url: `${getPublicAppOrigin()}/`, Icon: FaGlobe },
+    { name: "Demo video", url: getDemoVideoUrl(), Icon: FaYoutube },
     { name: "Pitch deck (Figma)", url: getPitchDeckUrl(), Icon: FaFigma },
   ];
 

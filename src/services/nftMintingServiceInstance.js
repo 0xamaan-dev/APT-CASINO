@@ -3,6 +3,7 @@ import { NFTMintingService } from './NFTMintingService';
 import CreditCoinGameLogger from './CreditCoinGameLogger';
 import initiaTestnetConfig from '../config/initiaTestnetConfig';
 import { TREASURY_CONFIG } from '../config/treasury';
+import { getInitiaGameLoggerAddress, getInitiaNftContractAddress } from '../config/contracts';
 
 // The ABI should come from the service to ensure consistency
 const SHARED_ABI = [
@@ -66,7 +67,7 @@ async function initializeMintingService() {
     }
 
     // Get NFT contract address
-    const nftContractAddress = process.env.NFT_CONTRACT_ADDRESS || process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS;
+    const nftContractAddress = getInitiaNftContractAddress();
     if (!nftContractAddress || nftContractAddress === '0x0000000000000000000000000000000000000000') {
       console.warn('⚠️ NFT contract address not configured - NFT minting disabled');
       return null;
@@ -117,7 +118,7 @@ async function initializeMintingService() {
  */
 async function startEventListener(provider, treasuryWallet) {
   try {
-    const gameLoggerAddress = process.env.NEXT_PUBLIC_INITIA_GAME_LOGGER_ADDRESS;
+    const gameLoggerAddress = getInitiaGameLoggerAddress();
     if (!gameLoggerAddress || gameLoggerAddress === '0x0000000000000000000000000000000000000000') {
       console.warn('⚠️ Game logger address not configured - event listener not started');
       return;

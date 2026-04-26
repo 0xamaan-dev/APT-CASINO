@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 import initiaTestnetConfig from '@/config/initiaTestnetConfig';
+import { getInitiaGameLoggerAddress, getInitiaNftContractAddress } from '@/config/contracts';
 
 /**
  * NFT Metadata API - ERC-721 compliant metadata endpoint
@@ -9,9 +10,8 @@ import initiaTestnetConfig from '@/config/initiaTestnetConfig';
  * Set NEXT_PUBLIC_APP_URL on Vercel (and NFT_BASE_URI) for canonical on-chain metadata links.
  */
 
-const NFT_CONTRACT_ADDRESS =
-  process.env.NFT_CONTRACT_ADDRESS || process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS;
-const GAME_LOGGER_ADDRESS = process.env.NEXT_PUBLIC_INITIA_GAME_LOGGER_ADDRESS;
+const NFT_CONTRACT_ADDRESS = getInitiaNftContractAddress();
+const GAME_LOGGER_ADDRESS = getInitiaGameLoggerAddress();
 const INITIA_RPC_URL = initiaTestnetConfig.rpcUrls.default.http[0];
 
 const NFT_ABI = [

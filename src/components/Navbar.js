@@ -1,6 +1,6 @@
 ﻿"use client";
 // Initia EVM Testnet
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { ethers } from 'ethers';
 import { createPortal } from "react-dom";
 import Image from "next/image";
@@ -11,7 +11,6 @@ import { useAccount, useChainId, useWalletClient } from 'wagmi';
 import { useSelector, useDispatch } from 'react-redux';
 import { setBalance, setLoading, loadBalanceFromStorage } from '@/store/balanceSlice';
 import { useSmartAccount } from '@/hooks/useSmartAccount';
-import { formatSmartAccountAddress } from '@/utils/smartAccountUtils';
 import EthereumConnectWalletButton from "./EthereumConnectWalletButton";
 import InitiaAutoSignControls from "./InitiaAutoSignControls";
 import WithdrawModal from "./WithdrawModal";
@@ -85,38 +84,14 @@ const ethereumClient = {
 
 const CASINO_MODULE_ADDRESS = process.env.NEXT_PUBLIC_CASINO_MODULE_ADDRESS || "0x0000000000000000000000000000000000000000";
 
-// Mock search results for demo purposes
-const MOCK_SEARCH_RESULTS = {
-  games: [
-    { id: 'game1', name: 'Roulette', path: '/game/roulette', type: 'Featured' },
-    { id: 'game2', name: 'Mines', path: '/game/mines', type: 'Popular' },
-    { id: 'game3', name: 'Spin Wheel', path: '/game/wheel', type: 'Featured' },
-    { id: 'game4', name: 'Plinko', path: '/game/plinko', type: 'Popular' },
-  ],
-  tournaments: [
-    { id: 'tournament1', name: 'High Roller Tournament', path: '/tournaments/high-roller', prize: '10,000 INIT' },
-    { id: 'tournament2', name: 'Weekend Battle', path: '/tournaments/weekend-battle', prize: '5,000 INIT' },
-  ],
-  pages: [
-    { id: 'page1', name: 'Bank', path: '/bank', description: 'Deposit and withdraw funds' },
-    { id: 'page2', name: 'Profile', path: '/profile', description: 'Your account details' },
-  ]
-};
-
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [userAddress, setUserAddress] = useState(null);
   const [isClient, setIsClient] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const [showNotificationsPanel, setShowNotificationsPanel] = useState(false);
   const [unreadNotifications, setUnreadNotifications] = useState(0);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState(null);
-  const searchInputRef = useRef(null);
-  const searchPanelRef = useRef(null);
   const notification = useNotification();
   const isDev = process.env.NODE_ENV === 'development';
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
@@ -141,13 +116,7 @@ export default function Navbar() {
   const isWalletReady = isConnected && address;
 
   // Smart Account hook
-  const {
-    isSmartAccount,
-    smartAccountInfo,
-    capabilities,
-    hasSmartAccountSupport,
-    supportedFeatures
-  } = useSmartAccount();
+  const { isSmartAccount } = useSmartAccount();
 
   // Use global wallet persistence hook
   useGlobalWalletPersistence();
@@ -296,33 +265,12 @@ export default function Navbar() {
     setIsClient(true);
     setUnreadNotifications(notifications.filter(n => !n.isRead).length);
 
-    // Initialize dark mode from local storage if available
-    const savedMode = localStorage.getItem('darkMode');
-    if (savedMode !== null) {
-      setIsDarkMode(savedMode === 'true');
-    }
-
     // Ethereum wallet integration - simplified for testnet only
     // In development mode, use mock data
     if (isDev) {
       setUserAddress('0x1234...dev');
     }
 
-    // Handle click outside search panel
-    const handleClickOutside = (event) => {
-      if (
-        searchPanelRef.current &&
-        !searchPanelRef.current.contains(event.target) &&
-        !searchInputRef.current?.contains(event.target)
-      ) {
-        setShowSearch(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
   }, [isDev, notifications]);
 
   // Close balance modal with ESC
@@ -616,29 +564,6 @@ export default function Navbar() {
     }
   };
 
-  // Handle search input
-  useEffect(() => {
-    if (searchQuery.length > 1) {
-      // In a real app, you would call an API here
-      // For demo, we'll filter the mock data
-      const query = searchQuery.toLowerCase();
-      const games = MOCK_SEARCH_RESULTS.games.filter(
-        game => game.name.toLowerCase().includes(query)
-      );
-      const tournaments = MOCK_SEARCH_RESULTS.tournaments.filter(
-        tournament => tournament.name.toLowerCase().includes(query)
-      );
-      const pages = MOCK_SEARCH_RESULTS.pages.filter(
-        page => page.name.toLowerCase().includes(query) ||
-          (page.description && page.description.toLowerCase().includes(query))
-      );
-
-      setSearchResults({ games, tournaments, pages });
-    } else {
-      setSearchResults(null);
-    }
-  }, [searchQuery]);
-
   const navLinks = [
     {
       name: "Home",
@@ -666,13 +591,6 @@ export default function Navbar() {
     router.push("/profile");
   };
 
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    localStorage.setItem('darkMode', newMode.toString());
-    // Here you would also apply the theme change to your app
-  };
-
   const markNotificationAsRead = (id) => {
     setNotifications(prev =>
       prev.map(n => n.id === id ? { ...n, isRead: true } : n)
@@ -685,22 +603,6 @@ export default function Navbar() {
     setUnreadNotifications(0);
     setShowNotificationsPanel(false);
     notification.success("All notifications marked as read");
-  };
-
-  const handleSearchIconClick = () => {
-    setShowSearch(prev => !prev);
-    if (!showSearch) {
-      // Focus the search input when opening
-      setTimeout(() => {
-        searchInputRef.current?.focus();
-      }, 100);
-    }
-  };
-
-  const handleSearchItemClick = (path) => {
-    router.push(path);
-    setShowSearch(false);
-    setSearchQuery('');
   };
 
   // Pyth Entropy handles randomness generation
@@ -778,176 +680,6 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-2 md:gap-3">
-            {/* Search Icon */}
-            <div className="relative">
-              <button
-                className="p-2 text-white/70 hover:text-white transition-colors rounded-full hover:bg-purple-500/20"
-                onClick={handleSearchIconClick}
-                aria-label="Search"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-              </button>
-
-              {/* Search Panel */}
-              {showSearch && (
-                <div
-                  className="absolute right-0 mt-2 w-80 md:w-96 bg-[#1A0015]/95 backdrop-blur-md border border-purple-500/30 rounded-lg shadow-xl z-40 animate-fadeIn"
-                  ref={searchPanelRef}
-                >
-                  <div className="p-3">
-                    <div className="relative">
-                      <input
-                        ref={searchInputRef}
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search games, tournaments..."
-                        className="w-full py-2 px-3 pr-10 bg-[#250020] border border-purple-500/20 rounded-md text-white focus:outline-none focus:border-purple-500"
-                      />
-                      <svg
-                        className="absolute right-3 top-2.5 text-white/50"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                      </svg>
-                    </div>
-                  </div>
-
-                  {searchQuery.length > 1 && (
-                    <div className="max-h-96 overflow-y-auto">
-                      {(!searchResults ||
-                        (searchResults.games.length === 0 &&
-                          searchResults.tournaments.length === 0 &&
-                          searchResults.pages.length === 0)) ? (
-                        <div className="p-4 text-center text-white/50">
-                          No results found
-                        </div>
-                      ) : (
-                        <>
-                          {/* Games */}
-                          {searchResults.games.length > 0 && (
-                            <div className="p-2">
-                              <h3 className="text-xs font-medium text-white/50 uppercase px-3 mb-1">Games</h3>
-                              {searchResults.games.map(game => (
-                                <div
-                                  key={game.id}
-                                  className="p-2 hover:bg-purple-500/10 rounded-md cursor-pointer mx-1"
-                                  onClick={() => handleSearchItemClick(game.path)}
-                                >
-                                  <div className="flex items-center">
-                                    <div className="w-8 h-8 rounded-md bg-purple-800/30 flex items-center justify-center mr-3">
-                                      <span className="text-sm">{game.name.charAt(0)}</span>
-                                    </div>
-                                    <div>
-                                      <p className="text-sm font-medium text-white">{game.name}</p>
-                                      <span className="text-xs text-white/50">{game.type}</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-
-                          {/* Tournaments */}
-                          {searchResults.tournaments.length > 0 && (
-                            <div className="p-2">
-                              <h3 className="text-xs font-medium text-white/50 uppercase px-3 mb-1">Tournaments</h3>
-                              {searchResults.tournaments.map(tournament => (
-                                <div
-                                  key={tournament.id}
-                                  className="p-2 hover:bg-purple-500/10 rounded-md cursor-pointer mx-1"
-                                  onClick={() => handleSearchItemClick(tournament.path)}
-                                >
-                                  <div className="flex items-center">
-                                    <div className="w-8 h-8 rounded-md bg-red-800/30 flex items-center justify-center mr-3">
-                                      <span className="text-sm">🏆</span>
-                                    </div>
-                                    <div>
-                                      <p className="text-sm font-medium text-white">{tournament.name}</p>
-                                      <span className="text-xs text-white/50">Prize: {tournament.prize}</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-
-                          {/* Pages */}
-                          {searchResults.pages.length > 0 && (
-                            <div className="p-2">
-                              <h3 className="text-xs font-medium text-white/50 uppercase px-3 mb-1">Pages</h3>
-                              {searchResults.pages.map(page => (
-                                <div
-                                  key={page.id}
-                                  className="p-2 hover:bg-purple-500/10 rounded-md cursor-pointer mx-1"
-                                  onClick={() => handleSearchItemClick(page.path)}
-                                >
-                                  <div className="flex items-center">
-                                    <div className="w-8 h-8 rounded-md bg-blue-800/30 flex items-center justify-center mr-3">
-                                      <span className="text-sm">{page.name.charAt(0)}</span>
-                                    </div>
-                                    <div>
-                                      <p className="text-sm font-medium text-white">{page.name}</p>
-                                      {page.description && (
-                                        <span className="text-xs text-white/50">{page.description}</span>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </>
-                      )}
-                    </div>
-                  )}
-
-                  {searchQuery.length > 0 && (
-                    <div className="p-2 border-t border-purple-500/20 text-center">
-                      <span className="text-xs text-white/50">
-                        Press Enter to search for "{searchQuery}"
-                      </span>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 text-white/70 hover:text-white transition-colors hidden md:block rounded-full hover:bg-purple-500/20"
-              aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {isDarkMode ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="4"></circle>
-                  <path d="M12 2v2"></path>
-                  <path d="M12 20v2"></path>
-                  <path d="M5 5l1.5 1.5"></path>
-                  <path d="M17.5 17.5l1.5 1.5"></path>
-                  <path d="M2 12h2"></path>
-                  <path d="M20 12h2"></path>
-                  <path d="M5 19l1.5-1.5"></path>
-                  <path d="M17.5 6.5l1.5-1.5"></path>
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-              )}
-            </button>
-
             {/* Notifications */}
             <div className="relative hidden md:block">
               <button
@@ -1035,29 +767,20 @@ export default function Navbar() {
               </div>
             )}
 
-            {/* Smart Account Status */}
-            {isConnected && (
+            {/* Smart account only — EOA users do not see an account-type chip here */}
+            {isConnected && isSmartAccount && (
               <button
+                type="button"
                 onClick={() => setShowSmartAccountModal(true)}
-                className={`px-3 py-2 bg-gradient-to-r border font-medium rounded-lg flex items-center gap-2 hover:opacity-80 transition-opacity ${isSmartAccount
-                  ? 'from-blue-500/20 to-cyan-600/20 border-blue-500/30 text-blue-300'
-                  : 'from-green-500/20 to-emerald-600/20 border-green-500/30 text-green-300'
-                  }`}
+                className="px-3 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-600/20 border border-blue-500/30 text-blue-300 font-medium rounded-lg flex items-center gap-2 hover:opacity-80 transition-opacity"
               >
-                {isSmartAccount ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                    <circle cx="9" cy="9" r="2" />
-                    <path d="M21 15.5c-1.5-1.5-4-1.5-5.5 0" />
-                    <path d="M12 12l9 9" />
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                )}
-                {isSmartAccount ? 'Smart Account' : 'EOA Account'}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <circle cx="9" cy="9" r="2" />
+                  <path d="M21 15.5c-1.5-1.5-4-1.5-5.5 0" />
+                  <path d="M12 12l9 9" />
+                </svg>
+                Smart Account
               </button>
             )}
 
@@ -1096,31 +819,6 @@ export default function Navbar() {
                 </div>
               ))}
               {/* Switch to Testnet button removed */}
-              <div className="flex justify-between items-center py-2 px-3">
-                <span className="text-white/70">Dark Mode</span>
-                <button
-                  onClick={toggleDarkMode}
-                  className="p-2 text-white/70 hover:text-white bg-purple-500/10 rounded-full flex items-center justify-center h-8 w-8"
-                >
-                  {isDarkMode ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="4"></circle>
-                      <path d="M12 2v2"></path>
-                      <path d="M12 20v2"></path>
-                      <path d="M5 5l1.5 1.5"></path>
-                      <path d="M17.5 17.5l1.5 1.5"></path>
-                      <path d="M2 12h2"></path>
-                      <path d="M20 12h2"></path>
-                      <path d="M5 19l1.5-1.5"></path>
-                      <path d="M17.5 6.5l1.5-1.5"></path>
-                    </svg>
-                  ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                  )}
-                </button>
-              </div>
 
               {/* User Balance in Mobile Menu */}
               {isWalletReady && (

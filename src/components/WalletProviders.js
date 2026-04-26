@@ -20,7 +20,8 @@ const queryClient = new QueryClient();
 
 const wagmiConfig = createConfig({
   chains: [initiaTestnet],
-  connectors: [initiaPrivyWalletConnector(), injected(), metaMask()],
+  // initiaPrivyWalletConnector is already a CreateConnectorFn (like injected(), not injected)
+  connectors: [initiaPrivyWalletConnector, injected(), metaMask()],
   transports: {
     [initiaTestnet.id]: http("https://jsonrpc-evm-1.anvil.asia-southeast.initia.xyz"),
   },

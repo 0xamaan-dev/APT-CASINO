@@ -24,3 +24,13 @@ export function getPitchDeckUrl() {
   }
   return PITCH_DECK_FIGMA_URL;
 }
+
+/** Hackathon / product demo (YouTube). Override with NEXT_PUBLIC_DEMO_VIDEO_URL. */
+export const DEMO_VIDEO_URL_DEFAULT = "https://youtu.be/hkBWR4cIVak";
+
+export function getDemoVideoUrl() {
+  if (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_DEMO_VIDEO_URL) {
+    return String(process.env.NEXT_PUBLIC_DEMO_VIDEO_URL).trim();
+  }
+  return DEMO_VIDEO_URL_DEFAULT;
+}

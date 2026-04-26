@@ -2,6 +2,7 @@
 
 - **Repository:** [https://github.com/0xamaan-dev/APT-CASINO](https://github.com/0xamaan-dev/APT-CASINO)
 - **Live app (Vercel):** [https://apt-casino-initia.vercel.app](https://apt-casino-initia.vercel.app)
+- **Demo video (YouTube):** [https://youtu.be/hkBWR4cIVak](https://youtu.be/hkBWR4cIVak)
 - **Pitch deck (Figma):** [APT Casino — Initia](https://www.figma.com/deck/MaNXzpdQG9Xu00r9LHuT1w/APT-Casino-Initia?node-id=1-1812&p=f&t=lw2ZfabwT0TwgRfK-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
 
 ## Initia
@@ -13,7 +14,7 @@
 APT Casino runs against **Initia public testnets** (not mainnet):
 
 - **Initia EVM testnet — `evm-1`** — Primary network for APT Casino ([Initia Scan — evm-1](https://scan.testnet.initia.xyz/evm-1)). Casino games, **wagmi** wallet flows, game logger, NFTs, and deposit/withdraw INIT all run on this EVM testnet.
-- **Treasury account on Scan** — [treasury account overview (evm-1)](https://scan.testnet.initia.xyz/evm-1/accounts/init1d6fj448sax0qujg9j9yuqdgefnp490jj0znsnx/overview).
+- **Treasury account on Scan** — [treasury EOA (evm-1)](https://scan.testnet.initia.xyz/evm-1/accounts/0x6E932AD4F0E99E0e49059149C035194cc352BE52/overview).
 
 ### Project Overview
 
@@ -90,7 +91,9 @@ APT Casino addresses these problems by offering:
 ### 3. Network architecture
 
 - **Primary chain**: **Initia EVM testnet `evm-1`** ([Initia Scan](https://scan.testnet.initia.xyz/evm-1)) for gameplay, treasury signing, and game logs.
-- **Treasury on Scan**: [EVM account overview](https://scan.testnet.initia.xyz/evm-1/accounts/init1d6fj448sax0qujg9j9yuqdgefnp490jj0znsnx/overview).
+- **Treasury on Scan**: [EVM account overview](https://scan.testnet.initia.xyz/evm-1/accounts/0x6E932AD4F0E99E0e49059149C035194cc352BE52/overview).
+- **Game logger contract**: [Initia Scan — `InitiaGameLogger`](https://scan.testnet.initia.xyz/evm-1/evm-contracts/0xcB559740E47eed913fDa1fFCecAd0D694dfA6271) (`0xcB559740E47eed913fDa1fFCecAd0D694dfA6271`).
+- **NFT collection**: [Initia Scan — NFT collection](https://scan.testnet.initia.xyz/evm-1/nft-collections/0x737165fE3834e07E0b053900BcE3C18Add9F2c7D) (`0x737165fE3834e07E0b053900BcE3C18Add9F2c7D`).
 - **Randomness**: Pyth Entropy (server-side RPC configured with `PYTH_ENTROPY_RPC_URL` and `PYTH_ENTROPY_SIGNER_PRIVATE_KEY` in `.env`)
 
 ### 4. Game Selection
@@ -392,8 +395,11 @@ sequenceDiagram
 On-chain addresses are **environment-driven** (treasury, game logger, NFT). After deployment, set them in `.env` (see [`.env.example`](./.env.example)).
 
 - **Live app (Vercel):** [https://apt-casino-initia.vercel.app](https://apt-casino-initia.vercel.app) — production UI; set `NEXT_PUBLIC_APP_URL` and `NFT_BASE_URI` (same origin + `/api/nft/`) on Vercel to match this host.
-- **Treasury EOA** — default signing address `0x6E932AD4F0E99E0e49059149C035194cc352BE52` (`NEXT_PUBLIC_INITIA_TREASURY_ADDRESS` / `INITIA_TREASURY_ADDRESS`). **Initia Scan (EVM testnet) overview:** [treasury account](https://scan.testnet.initia.xyz/evm-1/accounts/init1d6fj448sax0qujg9j9yuqdgefnp490jj0znsnx/overview) (`init1d6fj448sax0qujg9j9yuqdgefnp490jj0znsnx`). Override the explorer segment with `NEXT_PUBLIC_INITIA_TREASURY_ACCOUNT_SCAN_ID` / `INITIA_TREASURY_ACCOUNT_SCAN_ID` if the Scan account id changes.
-- **Initia EVM testnet `evm-1`** (chain ID `2124225178762456`): game logger, NFT collection, player-facing RPC/explorer, and treasury **signing** for payouts.
+- **Demo video (YouTube):** [https://youtu.be/hkBWR4cIVak](https://youtu.be/hkBWR4cIVak)
+- **Treasury EOA** — signing address `0x6E932AD4F0E99E0e49059149C035194cc352BE52` (`NEXT_PUBLIC_INITIA_TREASURY_ADDRESS` / `INITIA_TREASURY_ADDRESS`). **Initia Scan:** [treasury account overview](https://scan.testnet.initia.xyz/evm-1/accounts/0x6E932AD4F0E99E0e49059149C035194cc352BE52/overview). Override the `/accounts/…` segment with `NEXT_PUBLIC_INITIA_TREASURY_ACCOUNT_SCAN_ID` / `INITIA_TREASURY_ACCOUNT_SCAN_ID` if needed (`0x…` or `init1…`).
+- **Game logger (`InitiaGameLogger`)** — `0xcB559740E47eed913fDa1fFCecAd0D694dfA6271` ([contract on Scan](https://scan.testnet.initia.xyz/evm-1/evm-contracts/0xcB559740E47eed913fDa1fFCecAd0D694dfA6271)); env: `NEXT_PUBLIC_INITIA_GAME_LOGGER_ADDRESS`.
+- **NFT (`APTCasinoNFT`)** — `0x737165fE3834e07E0b053900BcE3C18Add9F2c7D` ([collection on Scan](https://scan.testnet.initia.xyz/evm-1/nft-collections/0x737165fE3834e07E0b053900BcE3C18Add9F2c7D)); env: `NFT_CONTRACT_ADDRESS` / `NEXT_PUBLIC_NFT_CONTRACT_ADDRESS`.
+- **Initia EVM testnet `evm-1`** (chain ID `2124225178762456`): player-facing RPC/explorer and the contracts above.
 - **Pyth Entropy**: public contract/provider addresses can stay as in `.env.example`; entropy transactions are signed server-side with `PYTH_ENTROPY_SIGNER_PRIVATE_KEY` against `PYTH_ENTROPY_RPC_URL` (often Arbitrum Sepolia RPC in development).
 
 ## 🎮 Game logger
@@ -500,5 +506,5 @@ APT-CASINO/
 
 - **Repository:** [https://github.com/0xamaan-dev/APT-CASINO](https://github.com/0xamaan-dev/APT-CASINO)
 - **Live app (Vercel):** [https://apt-casino-initia.vercel.app](https://apt-casino-initia.vercel.app)
+- **Demo video (YouTube):** [https://youtu.be/hkBWR4cIVak](https://youtu.be/hkBWR4cIVak)
 - **Pitch deck (Figma):** [APT Casino — Initia](https://www.figma.com/deck/MaNXzpdQG9Xu00r9LHuT1w/APT-Casino-Initia?node-id=1-1812&p=f&t=lw2ZfabwT0TwgRfK-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
-- **Demo / pitch videos:** (add your Initia deployment links when published)

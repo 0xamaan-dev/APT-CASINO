@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 import { TREASURY_CONFIG } from '@/config/treasury';
+import { getInitiaGameLoggerAddress } from '@/config/contracts';
 import initiaTestnetConfig from '@/config/initiaTestnetConfig';
 import { getMintingService } from '@/services/nftMintingServiceInstance';
 
@@ -13,7 +14,7 @@ import { getMintingService } from '@/services/nftMintingServiceInstance';
  */
 
 const TREASURY_PRIVATE_KEY = TREASURY_CONFIG.PRIVATE_KEY;
-const GAME_LOGGER_ADDRESS = process.env.NEXT_PUBLIC_INITIA_GAME_LOGGER_ADDRESS;
+const GAME_LOGGER_ADDRESS = getInitiaGameLoggerAddress();
 const INITIA_RPC_URL = initiaTestnetConfig.rpcUrls.default.http[0];
 
 const GAME_LOGGER_ABI = [

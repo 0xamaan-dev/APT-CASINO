@@ -10,7 +10,7 @@ async function main() {
   console.log("🔍 Verifying NFT Contract Deployment...");
   console.log("=" .repeat(60));
 
-  const contractAddress = "0x0B61D7b981062b0dd5D95F8B6455Eca0a2C1d8C7";
+  const contractAddress = "0x737165fE3834e07E0b053900BcE3C18Add9F2c7D";
   const treasuryAddress = process.env.CREDITCOIN_TREASURY_ADDRESS || process.env.TREASURY_ADDRESS;
 
   console.log("Contract Address:", contractAddress);

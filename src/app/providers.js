@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
 import { NotificationProvider } from '@/components/NotificationSystem';
-import { ThemeProvider } from 'next-themes';
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -71,16 +70,14 @@ const muiTheme = createTheme({
 export default function Providers({ children }) {
   return (
     <Provider store={store}>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-        <MuiThemeProvider theme={muiTheme}>
-          <CssBaseline />
-          <NotificationProvider>
-            <WalletProviders>
-              {children}
-            </WalletProviders>
-          </NotificationProvider>
-        </MuiThemeProvider>
-      </ThemeProvider>
+      <MuiThemeProvider theme={muiTheme}>
+        <CssBaseline />
+        <NotificationProvider>
+          <WalletProviders>
+            {children}
+          </WalletProviders>
+        </NotificationProvider>
+      </MuiThemeProvider>
     </Provider>
   );
 }

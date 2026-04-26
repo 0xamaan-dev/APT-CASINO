@@ -6,9 +6,9 @@
 export const DEFAULT_INITIA_TREASURY_ADDRESS =
   '0x6E932AD4F0E99E0e49059149C035194cc352BE52';
 
-/** Default Initia Scan EVM account id for treasury overview (`init1…` or `0x…`). */
+/** Default Initia Scan EVM account id for treasury overview (`0x…` or `init1…`). */
 export const DEFAULT_INITIA_TREASURY_ACCOUNT_SCAN_ID =
-  'init1d6fj448sax0qujg9j9yuqdgefnp490jj0znsnx';
+  '0x6E932AD4F0E99E0e49059149C035194cc352BE52';
 
 function getTreasuryAccountScanId() {
   return (

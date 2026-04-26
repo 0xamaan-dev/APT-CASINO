@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import initiaTestnetConfig, { getInitiaExplorerTxUrl } from '../config/initiaTestnetConfig';
+import { getInitiaGameLoggerAddress } from '../config/contracts';
 
 /**
  * Initia Game Logger Service
@@ -40,7 +41,7 @@ export class InitiaGameLogger {
     this.provider = provider;
     this.signer = signer;
     this.contract = null;
-    this.contractAddress = process.env.NEXT_PUBLIC_INITIA_GAME_LOGGER_ADDRESS;
+    this.contractAddress = getInitiaGameLoggerAddress();
     this.explorerUrl = initiaTestnetConfig.blockExplorers.default.url;
 
     if (this.provider && this.contractAddress) {
@@ -306,7 +307,7 @@ export class InitiaGameLogger {
       const directProvider = new ethers.JsonRpcProvider(
         'https://jsonrpc-evm-1.anvil.asia-southeast.initia.xyz'
       );
-      const contractAddress = process.env.NEXT_PUBLIC_INITIA_GAME_LOGGER_ADDRESS;
+      const contractAddress = getInitiaGameLoggerAddress();
       if (!contractAddress) return null;
       const tempContract = new ethers.Contract(contractAddress, GAME_LOGGER_ABI, directProvider);
       const filter = tempContract.filters.GameResultLogged(logId);
