@@ -10,7 +10,7 @@ async function main() {
   console.log("Starting contract verification on Initia EVM testnet (evm-1)...\n");
 
   const NFT_BASE_URI =
-    process.env.NFT_BASE_URI || "https://apt-casino-initia.vercel.app/api/nft/";
+    process.env.NFT_BASE_URI || "https://apt-casino-initia-chi.vercel.app/api/nft/";
 
   try {
     console.log("Verifying APTCasinoNFT at:", NFT_CONTRACT_ADDRESS);

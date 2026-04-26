@@ -1,7 +1,7 @@
 /**
  * Canonical production app origin (Vercel). Override with NEXT_PUBLIC_APP_URL for forks / staging.
  */
-export const PUBLIC_APP_ORIGIN_DEFAULT = "https://apt-casino-initia.vercel.app";
+export const PUBLIC_APP_ORIGIN_DEFAULT = "https://apt-casino-initia-chi.vercel.app";
 
 export function getPublicAppOrigin() {
   const fromEnv =

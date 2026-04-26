@@ -14,7 +14,7 @@ export function getInitiaChainIconUrls() {
   const base =
     typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_APP_URL
       ? String(process.env.NEXT_PUBLIC_APP_URL).replace(/\/$/, '')
-      : 'https://apt-casino-initia.vercel.app';
+      : 'https://apt-casino-initia-chi.vercel.app';
   return [`${base}/logos/initia.png`];
 }
 

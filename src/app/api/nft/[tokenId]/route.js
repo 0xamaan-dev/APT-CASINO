@@ -6,7 +6,7 @@ import { getInitiaGameLoggerAddress, getInitiaNftContractAddress } from '@/confi
 /**
  * NFT Metadata API - ERC-721 compliant metadata endpoint
  * Base URL: {NEXT_PUBLIC_APP_URL}/api/nft/{tokenId}
- * Production example: https://apt-casino-initia.vercel.app/api/nft/{tokenId}
+ * Production example: https://apt-casino-initia-chi.vercel.app/api/nft/{tokenId}
  * Set NEXT_PUBLIC_APP_URL on Vercel (and NFT_BASE_URI) for canonical on-chain metadata links.
  */
 

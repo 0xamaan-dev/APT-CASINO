@@ -1,7 +1,7 @@
 # APT Casino
 
 - **Repository:** [https://github.com/0xamaan-dev/APT-CASINO](https://github.com/0xamaan-dev/APT-CASINO)
-- **Live app (Vercel):** [https://apt-casino-initia.vercel.app](https://apt-casino-initia.vercel.app)
+- **Live app (Vercel):** [https://apt-casino-initia-chi.vercel.app](https://apt-casino-initia-chi.vercel.app)
 - **Demo video (YouTube):** [https://youtu.be/hkBWR4cIVak](https://youtu.be/hkBWR4cIVak)
 - **Pitch deck (Figma):** [APT Casino — Initia](https://www.figma.com/deck/MaNXzpdQG9Xu00r9LHuT1w/APT-Casino-Initia?node-id=1-1812&p=f&t=lw2ZfabwT0TwgRfK-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
 
@@ -154,7 +154,7 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:3000` for local development, or the live deployment at [https://apt-casino-initia.vercel.app](https://apt-casino-initia.vercel.app).
+Visit `http://localhost:3000` for local development, or the live deployment at [https://apt-casino-initia-chi.vercel.app](https://apt-casino-initia-chi.vercel.app).
 
 **Note:** Make sure to configure all required environment variables in your `.env` file before running the application. See the [Environment Variables](#environment-variables) section for the complete configuration.
 
@@ -394,7 +394,7 @@ sequenceDiagram
 
 On-chain addresses are **environment-driven** (treasury, game logger, NFT). After deployment, set them in `.env` (see [`.env.example`](./.env.example)).
 
-- **Live app (Vercel):** [https://apt-casino-initia.vercel.app](https://apt-casino-initia.vercel.app) — production UI; set `NEXT_PUBLIC_APP_URL` and `NFT_BASE_URI` (same origin + `/api/nft/`) on Vercel to match this host.
+- **Live app (Vercel):** [https://apt-casino-initia-chi.vercel.app](https://apt-casino-initia-chi.vercel.app) — production UI; set `NEXT_PUBLIC_APP_URL` and `NFT_BASE_URI` (same origin + `/api/nft/`) on Vercel to match this host.
 - **Demo video (YouTube):** [https://youtu.be/hkBWR4cIVak](https://youtu.be/hkBWR4cIVak)
 - **Treasury EOA** — signing address `0x6E932AD4F0E99E0e49059149C035194cc352BE52` (`NEXT_PUBLIC_INITIA_TREASURY_ADDRESS` / `INITIA_TREASURY_ADDRESS`). **Initia Scan:** [treasury account overview](https://scan.testnet.initia.xyz/evm-1/accounts/0x6E932AD4F0E99E0e49059149C035194cc352BE52/overview). Override the `/accounts/…` segment with `NEXT_PUBLIC_INITIA_TREASURY_ACCOUNT_SCAN_ID` / `INITIA_TREASURY_ACCOUNT_SCAN_ID` if needed (`0x…` or `init1…`).
 - **Game logger (`InitiaGameLogger`)** — `0xcB559740E47eed913fDa1fFCecAd0D694dfA6271` ([contract on Scan](https://scan.testnet.initia.xyz/evm-1/evm-contracts/0xcB559740E47eed913fDa1fFCecAd0D694dfA6271)); env: `NEXT_PUBLIC_INITIA_GAME_LOGGER_ADDRESS`.
@@ -431,7 +431,7 @@ Copy [`.env.example`](./.env.example) to `.env` and fill in secrets (Supabase, W
 ### NFT metadata
 
 - **`NFT_CONTRACT_ADDRESS` / `NEXT_PUBLIC_NFT_CONTRACT_ADDRESS`**: ERC-721 on Initia.
-- **`NFT_BASE_URI`**: should point at your deployment’s metadata route, e.g. `https://apt-casino-initia.vercel.app/api/nft/` (see `src/app/api/nft/[tokenId]/route.js`).
+- **`NFT_BASE_URI`**: should point at your deployment’s metadata route, e.g. `https://apt-casino-initia-chi.vercel.app/api/nft/` (see `src/app/api/nft/[tokenId]/route.js`).
 - **`ENABLE_NFT_MINTING`**: `"true"` / `"false"`.
 
 ### Smart contract deployment (Initia)
@@ -450,7 +450,7 @@ npx hardhat run scripts/deploy-nft-contract.js --network initia-testnet
 # Build the application
 npm run build
 
-# Deploy to Vercel (production: https://apt-casino-initia.vercel.app)
+# Deploy to Vercel (production: https://apt-casino-initia-chi.vercel.app)
 vercel deploy
 
 # Or deploy to other platforms
@@ -505,6 +505,6 @@ APT-CASINO/
 ## 🔗 Links and resources
 
 - **Repository:** [https://github.com/0xamaan-dev/APT-CASINO](https://github.com/0xamaan-dev/APT-CASINO)
-- **Live app (Vercel):** [https://apt-casino-initia.vercel.app](https://apt-casino-initia.vercel.app)
+- **Live app (Vercel):** [https://apt-casino-initia-chi.vercel.app](https://apt-casino-initia-chi.vercel.app)
 - **Demo video (YouTube):** [https://youtu.be/hkBWR4cIVak](https://youtu.be/hkBWR4cIVak)
 - **Pitch deck (Figma):** [APT Casino — Initia](https://www.figma.com/deck/MaNXzpdQG9Xu00r9LHuT1w/APT-Casino-Initia?node-id=1-1812&p=f&t=lw2ZfabwT0TwgRfK-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)

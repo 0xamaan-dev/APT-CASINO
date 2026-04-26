@@ -4,7 +4,7 @@ This repo is **Initia EVM Testnet**–focused. Record verified contract addresse
 
 Repository: https://github.com/0xamaan-dev/APT-CASINO
 
-Live app (Vercel): https://apt-casino-initia.vercel.app
+Live app (Vercel): https://apt-casino-initia-chi.vercel.app
 
 Treasury (Initia Scan): https://scan.testnet.initia.xyz/evm-1/accounts/0x6E932AD4F0E99E0e49059149C035194cc352BE52/overview
 
