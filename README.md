@@ -8,9 +8,16 @@
 
 - **Project Name**: APT Casino
 
+### Testnets
+
+APT Casino runs against **Initia public testnets** (not mainnet):
+
+- **Initia L1 testnet — `initiation-2`** — Default Initia L1 test chain ([Initia Scan — initiation-2](https://scan.testnet.initia.xyz/initiation-2)). InterwovenKit **auto-signing** targets this network; the **treasury EOA** is shown on Scan under `initiation-2` / accounts.
+- **Initia EVM Testnet** — Chain ID `2124225178762456` (Anvil RPC in `.env.example`). Casino games, **wagmi** wallet flows, game logger, NFTs, and deposit/withdraw INIT use this **EVM** testnet.
+
 ### Project Overview
 
-APT Casino is a provably fair, Initia casino: players connect with InterwovenKit-compatible wallets, play multiple games, and have rounds logged on-chain. The app targets web3 users who want transparent randomness (Pyth Entropy for server-side draws) and verifiable game history on **Initia Testnet**, with treasury-backed UX for deposits and play.
+APT Casino is a provably fair, Initia casino: players connect with InterwovenKit-compatible wallets, play multiple games, and have rounds logged on-chain. The app targets web3 users who want transparent randomness (Pyth Entropy for server-side draws) and verifiable game history on **Initia EVM Testnet**, with InterwovenKit on **L1 testnet `initiation-2`** and treasury-backed UX for deposits and play.
 
 ### Implementation Detail
 
@@ -82,7 +89,8 @@ APT Casino addresses these problems by offering:
 
 ### 3. Network architecture
 
-- **Gaming, treasury, and logs**: [Initia EVM Testnet](https://initia.xyz) (chain ID `2124225178762456`)
+- **L1 testnet**: **`initiation-2`** on [Initia Scan](https://scan.testnet.initia.xyz/initiation-2) — InterwovenKit auto-sign; treasury EOA account pages.
+- **Gaming, treasury signing, and logs**: [Initia EVM Testnet](https://initia.xyz) (chain ID `2124225178762456`) — in-wallet gameplay and contracts.
 - **Randomness**: Pyth Entropy (server-side RPC configured with `PYTH_ENTROPY_RPC_URL` and `PYTH_ENTROPY_SIGNER_PRIVATE_KEY` in `.env`)
 
 ### 4. Game Selection
@@ -114,7 +122,7 @@ APT Casino addresses these problems by offering:
 
 ### Network configuration (wallet)
 
-Add **Initia EVM Testnet** to your wallet (values match `.env.example`):
+Add **Initia EVM Testnet** to your wallet for casino transactions (values match `.env.example`). **`initiation-2`** is the separate Initia **L1** testnet used by InterwovenKit—you do not add it as an EVM custom network; use the **Initia auto-sign** controls after connecting.
 
 - **Network name**: Initia EVM Testnet (Anvil)
 - **RPC URL**: `NEXT_PUBLIC_INITIA_TESTNET_RPC` from `.env`
@@ -383,7 +391,9 @@ sequenceDiagram
 
 On-chain addresses are **environment-driven** (treasury, game logger, NFT). After deployment, set them in `.env` (see [`.env.example`](./.env.example)).
 
-- **Initia EVM Testnet** (chain ID `2124225178762456`): treasury, game logger, NFT collection, player-facing RPC/explorer.
+- **Treasury EOA (Initia testnet L1)** — default `0x6E932AD4F0E99E0e49059149C035194cc352BE52`; on-chain view: [Initia Scan — initiation-2 account](https://scan.testnet.initia.xyz/initiation-2/accounts/0x6E932AD4F0E99E0e49059149C035194cc352BE52). Override with `NEXT_PUBLIC_INITIA_TREASURY_ADDRESS` / `INITIA_TREASURY_ADDRESS` if you use a different wallet.
+- **Initia L1 testnet `initiation-2`**: treasury EOA on [Initia Scan](https://scan.testnet.initia.xyz/initiation-2); InterwovenKit L1 test config.
+- **Initia EVM Testnet** (chain ID `2124225178762456`): game logger, NFT collection, player-facing RPC/explorer; treasury **signing** for payouts uses the EVM RPC in `.env`.
 - **Pyth Entropy**: public contract/provider addresses can stay as in `.env.example`; entropy transactions are signed server-side with `PYTH_ENTROPY_SIGNER_PRIVATE_KEY` against `PYTH_ENTROPY_RPC_URL` (often Arbitrum Sepolia RPC in development).
 
 ## 🎮 Game logger

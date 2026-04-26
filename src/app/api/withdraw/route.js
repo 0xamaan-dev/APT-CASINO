@@ -1,6 +1,7 @@
 ﻿import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 import { TREASURY_CONFIG } from '@/config/treasury';
+import { getInitiaL1AccountExplorerUrl } from '@/config/initiaTestnetConfig';
 import initiaTestnetConfig from '@/config/initiaTestnetConfig';
 
 /**
@@ -121,7 +122,7 @@ export async function GET() {
         currency: 'INIT',
         status: 'active',
         network: 'Initia EVM Testnet',
-        explorerUrl: `https://scan.testnet.initia.xyz/evm-1/accounts/${treasuryWallet.address}`,
+        explorerUrl: getInitiaL1AccountExplorerUrl(treasuryWallet.address),
       });
     } catch (balanceError) {
       return NextResponse.json({

@@ -1,10 +1,16 @@
-﻿// Treasury — Initia EVM Testnet
+﻿import { getInitiaL1AccountExplorerUrl } from '@/config/initiaTestnetConfig';
+
+/** Treasury — Initia EVM Testnet (EOA; L1 account view on Initia Scan `initiation-2`). */
+
+/** Default public treasury EOA (Initia testnet). Override via env in production. */
+export const DEFAULT_INITIA_TREASURY_ADDRESS =
+  '0x6E932AD4F0E99E0e49059149C035194cc352BE52';
 
 export const TREASURY_CONFIG = {
   ADDRESS:
     process.env.NEXT_PUBLIC_INITIA_TREASURY_ADDRESS ||
     process.env.INITIA_TREASURY_ADDRESS ||
-    '0x71197e7a1CA5A2cb2AD82432B924F69B1E3dB123',
+    DEFAULT_INITIA_TREASURY_ADDRESS,
 
   PRIVATE_KEY: process.env.INITIA_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY || '',
 
@@ -37,3 +43,8 @@ export const getTreasuryInfo = () => ({
   network: TREASURY_CONFIG.NETWORK.CHAIN_NAME,
   chainId: TREASURY_CONFIG.NETWORK.CHAIN_ID,
 });
+
+/** Initia Scan (L1 `initiation-2`) URL for the configured treasury address. */
+export function getTreasuryInitiaScanUrl() {
+  return getInitiaL1AccountExplorerUrl(TREASURY_CONFIG.ADDRESS);
+}

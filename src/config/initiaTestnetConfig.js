@@ -29,6 +29,9 @@ export const initiaTestnetConfig = {
   testnet: true,
 };
 
+/** Initia L1 testnet on [Initia Scan](https://scan.testnet.initia.xyz) — use for EOA / account pages (e.g. casino treasury). */
+export const initiaL1TestnetScanBase = 'https://scan.testnet.initia.xyz/initiation-2';
+
 export const initiaTestnetTokens = {
   INIT: {
     address: 'native',
@@ -46,5 +49,9 @@ export const getInitiaExplorerTxUrl = (txHash) => {
 export const getInitiaExplorerAddressUrl = (address) => {
   return `${initiaTestnetConfig.blockExplorers.default.url}/accounts/${address}`;
 };
+
+/** Account page on Initia L1 testnet (`initiation-2`), e.g. treasury EOA. */
+export const getInitiaL1AccountExplorerUrl = (address) =>
+  `${initiaL1TestnetScanBase}/accounts/${address}`;
 
 export default initiaTestnetConfig;

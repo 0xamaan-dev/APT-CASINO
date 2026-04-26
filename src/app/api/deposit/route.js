@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server';
-import { TREASURY_CONFIG } from '@/config/treasury';
+import { TREASURY_CONFIG, getTreasuryInitiaScanUrl } from '@/config/treasury';
 
 /**
  * Deposit API - Initia EVM Testnet
  * Users send INIT to the treasury wallet. This API verifies and records the deposit.
  */
 
-const INITIA_TREASURY_ADDRESS =
-  process.env.NEXT_PUBLIC_INITIA_TREASURY_ADDRESS || TREASURY_CONFIG.ADDRESS;
+const INITIA_TREASURY_ADDRESS = TREASURY_CONFIG.ADDRESS;
 
 const INITIA_CHAIN_ID = 2124225178762456;
 
@@ -37,6 +36,7 @@ export async function POST(request) {
       amount,
       userAddress,
       treasuryAddress: INITIA_TREASURY_ADDRESS,
+      treasuryExplorerUrl: getTreasuryInitiaScanUrl(),
       network: 'initia-testnet',
       chainId: INITIA_CHAIN_ID,
       currency: 'INIT',

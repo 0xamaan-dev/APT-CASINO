@@ -22,14 +22,9 @@ import { useGlobalWalletPersistence } from '../hooks/useGlobalWalletPersistence'
 
 
 import { useNotification } from './NotificationSystem';
-import { INITIA_CONTRACTS, INITIA_NETWORKS } from '../config/contracts';
 import initiaTestnetConfig from '../config/initiaTestnetConfig';
 import { formatDisplayBalance } from '@/utils/formatters';
-
-// Treasury configuration
-const TREASURY_CONFIG = {
-  ADDRESS: INITIA_CONTRACTS[INITIA_NETWORKS.TESTNET].treasury,
-};
+import { TREASURY_CONFIG, getTreasuryInitiaScanUrl } from '@/config/treasury';
 // Enhanced UserBalanceSystem with deposit functionality
 const UserBalanceSystem = {
   getBalance: async (address) => {
@@ -506,7 +501,7 @@ export default function Navbar() {
       console.log('✅ Already on correct network');
 
       // Casino treasury address from Initia contracts config
-      const TREASURY_ADDRESS = INITIA_CONTRACTS[INITIA_NETWORKS.TESTNET].treasury;
+      const TREASURY_ADDRESS = TREASURY_CONFIG.ADDRESS;
 
       // Convert amount to Wei (18 decimals)
       const amountWei = BigInt(Math.floor(amount * 1e18));
@@ -1202,7 +1197,15 @@ export default function Navbar() {
               <div className="mb-6">
                 <h4 className="text-sm font-medium text-white mb-2">Deposit INIT to Casino Treasury</h4>
                 <div className="text-xs text-gray-400 mb-2">
-                  Treasury: {TREASURY_CONFIG.ADDRESS.slice(0, 10)}...{TREASURY_CONFIG.ADDRESS.slice(-8)}
+                  Treasury:{' '}
+                  <a
+                    href={getTreasuryInitiaScanUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-purple-300 hover:underline"
+                  >
+                    {TREASURY_CONFIG.ADDRESS.slice(0, 10)}...{TREASURY_CONFIG.ADDRESS.slice(-8)}
+                  </a>
                 </div>
                 <div className="flex gap-2">
                   <input

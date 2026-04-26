@@ -1,5 +1,7 @@
 ﻿// Initia EVM Testnet — contract addresses and network metadata
 
+import { DEFAULT_INITIA_TREASURY_ADDRESS } from '@/config/treasury';
+
 export const INITIA_NETWORKS = {
   TESTNET: 'initia-testnet',
 };
@@ -20,7 +22,10 @@ export const DEFAULT_NETWORK = INITIA_NETWORKS.TESTNET;
 
 export const INITIA_CONTRACTS = {
   [INITIA_NETWORKS.TESTNET]: {
-    treasury: process.env.NEXT_PUBLIC_INITIA_TREASURY_ADDRESS || '',
+    treasury:
+      process.env.NEXT_PUBLIC_INITIA_TREASURY_ADDRESS ||
+      process.env.INITIA_TREASURY_ADDRESS ||
+      DEFAULT_INITIA_TREASURY_ADDRESS,
     gameLogger: process.env.NEXT_PUBLIC_INITIA_GAME_LOGGER_ADDRESS || '',
   },
 };
