@@ -184,7 +184,7 @@ console.log('\n═════════════════════�
 console.log('TEST 6: Save Game Result API - Somnia Integration');
 console.log('═══════════════════════════════════════════════════════');
 
-const saveResultPath = path.join(__dirname, '../src/pages/api/games/save-result.js');
+const saveResultPath = path.join(__dirname, '../src/app/api/games/save-result/route.js');
 const saveResultCheck = checkFile(saveResultPath);
 if (saveResultCheck) {
   if (saveResultCheck.content.includes('somniaTxHash')) {
@@ -217,7 +217,7 @@ console.log('\n═════════════════════�
 console.log('TEST 7: Game History API - Dual Network Support');
 console.log('═══════════════════════════════════════════════════════');
 
-const historyPath = path.join(__dirname, '../src/pages/api/games/history.js');
+const historyPath = path.join(__dirname, '../src/app/api/games/history/route.js');
 const historyCheck = checkFile(historyPath);
 if (historyCheck) {
   if (historyCheck.content.includes('GameHistoryService')) {
