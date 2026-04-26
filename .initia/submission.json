@@ -1,9 +1,9 @@
 {
   "project_name": "APT Casino",
   "repo_url": "https://github.com/0xamaan-dev/APT-CASINO",
-  "commit_sha": "ea6b163b680a5087425db2fbac12514fc5feb36b",
+  "commit_sha": "a121eee78c4ac9fc0edb1236f5bc5a12d2d85ccd",
   "rollup_chain_id": "initia-testnet",
-  "deployed_address": "0xcB559740E47eed913fDa1fFCecAd0D694dfA6271",
+  "deployed_address": "0x6E932AD4F0E99E0e49059149C035194cc352BE52 || 0xcB559740E47eed913fDa1fFCecAd0D694dfA6271 || 0x737165fE3834e07E0b053900BcE3C18Add9F2c7D",
   "vm": "evm",
   "native_feature": "auto-signing",
   "core_logic_path": "contracts/InitiaGameLogger.sol",
