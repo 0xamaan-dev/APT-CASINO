@@ -1,7 +1,7 @@
 {
   "project_name": "APT Casino",
   "repo_url": "https://github.com/0xamaan-dev/APT-CASINO",
-  "commit_sha": "0000000000000000000000000000000000000000",
+  "commit_sha": "ea6b163b680a5087425db2fbac12514fc5feb36b",
   "rollup_chain_id": "initia-testnet",
   "deployed_address": "0xcB559740E47eed913fDa1fFCecAd0D694dfA6271",
   "vm": "evm",
