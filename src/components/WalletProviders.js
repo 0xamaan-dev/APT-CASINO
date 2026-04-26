@@ -9,8 +9,8 @@ import {
   InterwovenKitProvider,
   initiaPrivyWalletConnector,
   injectStyles,
-} from "@initia/interwovenkit-react";
-import InterwovenKitStyles from "@initia/interwovenkit-react/styles.js";
+  interwovenKitStyles,
+} from "@/config/interwovenKit";
 import { initiaTestnet } from "@/config/chains";
 import { WalletStatusProvider } from "@/hooks/useWalletStatus";
 import WalletConnectionGuard from "@/components/WalletConnectionGuard";
@@ -19,7 +19,7 @@ const queryClient = new QueryClient();
 
 const wagmiConfig = createConfig({
   chains: [initiaTestnet],
-  connectors: [initiaPrivyWalletConnector, injected(), metaMask()],
+  connectors: [initiaPrivyWalletConnector(), injected(), metaMask()],
   transports: {
     [initiaTestnet.id]: http("https://jsonrpc-evm-1.anvil.asia-southeast.initia.xyz"),
   },
@@ -28,7 +28,7 @@ const wagmiConfig = createConfig({
 
 function InterwovenStyleRoot() {
   useEffect(() => {
-    injectStyles(InterwovenKitStyles);
+    injectStyles(interwovenKitStyles);
   }, []);
   return null;
 }

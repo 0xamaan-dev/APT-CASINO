@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <link
+          key="preload-clash-display"
           rel="preload"
           href="/fonts/ClashDisplay-Variable.woff2"
           as="font"
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
         <link
+          key="preload-plus-jakarta"
           rel="preload"
           href="/fonts/PlusJakartaSans VariableFont.woff2"
           as="font"

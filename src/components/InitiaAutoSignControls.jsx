@@ -5,7 +5,7 @@
  * Lets users enable session-style signing on Initia L1 (initiation-2) per InterwovenKit TESTNET config.
  * EVM casino flows remain on wagmi; this complements the required Initia UX stack.
  */
-import { TESTNET, useInterwovenKit } from "@initia/interwovenkit-react";
+import { TESTNET, useInterwovenKit } from "@/config/interwovenKit";
 import { useAccount } from "wagmi";
 
 const L1_CHAIN = TESTNET.defaultChainId;
