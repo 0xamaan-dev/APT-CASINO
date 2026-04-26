@@ -161,10 +161,10 @@ const BettingPanel = ({
                 min="0.001"
               />
               <Image
-                src="/coin.png"
+                src="/logos/initia.png"
                 width={20}
                 height={20}
-                alt="coin"
+                alt="INIT"
                 className=""
               />
             </div>
@@ -274,10 +274,10 @@ const BettingPanel = ({
               <div className="flex items-center bg-[#120521] p-2 py-3 rounded-sm">
                 <input type="number" className="bg-transparent outline-none border-none text-white w-full" value={stopProfit} onChange={(e) => setStopProfit(e.target.value)} />
                 <Image
-                  src="/coin.png"
+                  src="/logos/initia.png"
                   width={20}
                   height={20}
-                  alt="coin"
+                  alt="INIT"
                   className=""
                 />
               </div>
@@ -291,10 +291,10 @@ const BettingPanel = ({
               <div className="flex items-center bg-[#120521] p-2 py-3 rounded-sm">
                 <input type="number" className="bg-transparent outline-none border-none text-white w-full" value={stopLoss} onChange={(e) => setStopLoss(e.target.value)} />
                 <Image
-                  src="/coin.png"
+                  src="/logos/initia.png"
                   width={20}
                   height={20}
-                  alt="coin"
+                  alt="INIT"
                   className=""
                 />
               </div>

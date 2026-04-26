@@ -30,8 +30,8 @@ export default function Footer() {
   ];
 
   const paymentMethods = [
-    { name: "INIT", icon: "/icons/eth.svg" },
-    { name: "INIT", icon: "/icons/apt.svg" },
+    { name: "INIT", icon: "/logos/initia.png" },
+    { name: "INIT", icon: "/logos/initia.png" },
   ];
 
   const handleSubscribe = (e) => {

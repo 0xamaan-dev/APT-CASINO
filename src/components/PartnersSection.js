@@ -6,7 +6,7 @@ const PartnersSection = () => {
     {
       category: 'Blockchain',
       items: [
-        { id: 1, name: 'Initia Network', logo: '/images/partners/ethereum.svg' },
+        { id: 1, name: 'Initia Network', logo: '/logos/initia.png' },
         { id: 2, name: 'Creditcoin Foundation', logo: '/images/partners/ethereum.svg' },
       ]
     },

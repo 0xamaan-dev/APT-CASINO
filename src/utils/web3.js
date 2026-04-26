@@ -1,5 +1,6 @@
 ﻿import { ethers } from 'ethers';
 import { NETWORK_INFO, INITIA_NETWORKS } from '../config/contracts';
+import { getInitiaChainIconUrls } from '@/utils/networkUtils';
 import {
   rouletteContractAddress,
   tokenContractAddress,
@@ -66,6 +67,7 @@ export const switchToMantleSepolia = async () => {
                 'https://jsonrpc-evm-1.anvil.asia-southeast.initia.xyz',
             ],
             blockExplorerUrls: [info.explorer],
+            iconUrls: getInitiaChainIconUrls(),
           },
         ],
       });

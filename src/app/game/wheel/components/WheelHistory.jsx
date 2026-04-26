@@ -184,7 +184,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                   justifyContent: 'center'
                 }}
               >
-                <Image src="/coin.png" width={20} height={20} alt="coin" />
+                <Image src="/logos/initia.png" width={20} height={20} alt="INIT" />
               </Box>
             </Box>
           </Box>
@@ -541,7 +541,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                       >
                         {item.betAmount} INIT
                       </Typography>
-                      <Image src="/coin.png" width={16} height={16} alt="coin" />
+                      <Image src="/logos/initia.png" width={16} height={16} alt="INIT" />
                     </Box>
                   </TableCell>
                   <TableCell
@@ -572,7 +572,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                       >
                         {item.payout} INIT
                       </Typography>
-                      <Image src="/coin.png" width={16} height={16} alt="coin" />
+                      <Image src="/logos/initia.png" width={16} height={16} alt="INIT" />
                     </Box>
                   </TableCell>
                   <TableCell

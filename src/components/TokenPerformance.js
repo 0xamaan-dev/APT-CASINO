@@ -1,5 +1,6 @@
 ﻿'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import GradientBorderButton from '@/components/GradientBorderButton';
 import Link from 'next/link';
 
@@ -65,9 +66,13 @@ const TokenPerformance = () => {
               <div className="flex justify-between items-center mb-6">
                 <div>
                   <div className="flex items-center">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-red-magic to-blue-magic flex items-center justify-center mr-2">
-                      <span className="text-white font-bold text-sm">A</span>
-                    </div>
+                    <Image
+                      src="/logos/initia.png"
+                      alt="Initia"
+                      width={32}
+                      height={32}
+                      className="mr-2 rounded-full object-cover"
+                    />
                     <h3 className="text-white text-xl font-medium">INIT</h3>
                     <span className={`ml-3 px-2 py-1 rounded text-xs ${
                       tokenData.priceChange24h >= 0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'

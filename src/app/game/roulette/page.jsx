@@ -22,6 +22,7 @@ import { gameData, bettingTableData } from "./config/gameDetail";
 import { useToken } from "@/hooks/useToken";
 
 import useWalletStatus from '@/hooks/useWalletStatus';
+import { getInitiaChainIconUrls } from '@/utils/networkUtils';
 
 import { FaVolumeMute, FaVolumeUp, FaChartLine, FaCoins, FaTrophy, FaDice, FaBalanceScale, FaRandom, FaPercentage, FaPlayCircle } from "react-icons/fa";
 import { GiCardRandom, GiDiceTarget, GiRollingDices, GiPokerHand } from "react-icons/gi";
@@ -1710,6 +1711,7 @@ export default function GameRoulette() {
                   },
                   rpcUrls: ["https://jsonrpc-evm-1.anvil.asia-southeast.initia.xyz"],
                   blockExplorerUrls: ["https://scan.testnet.initia.xyz/evm-1"],
+                  iconUrls: getInitiaChainIconUrls(),
                 },
               ],
             });

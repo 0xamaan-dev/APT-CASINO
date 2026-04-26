@@ -6,6 +6,18 @@ export {
   getInitiaEvmAccountExplorerOverviewUrl,
 } from '@/config/initiaTestnetConfig';
 
+/** EIP-3085 `iconUrls` for `wallet_addEthereumChain` (absolute URLs). */
+export function getInitiaChainIconUrls() {
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return [`${window.location.origin}/logos/initia.png`];
+  }
+  const base =
+    typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_APP_URL
+      ? String(process.env.NEXT_PUBLIC_APP_URL).replace(/\/$/, '')
+      : 'https://apt-casino-initia.vercel.app';
+  return [`${base}/logos/initia.png`];
+}
+
 export const INITIA_TESTNET_CONFIG = {
   chainId: '0x' + (2124225178762456n).toString(16),
   chainName: 'Initia EVM Testnet',
@@ -42,6 +54,7 @@ export const switchToInitiaTestnet = async () => {
               nativeCurrency: { name: 'Initia', symbol: 'INIT', decimals: 18 },
               rpcUrls: ['https://jsonrpc-evm-1.anvil.asia-southeast.initia.xyz'],
               blockExplorerUrls: ['https://scan.testnet.initia.xyz/evm-1'],
+              iconUrls: getInitiaChainIconUrls(),
             },
           ],
         });

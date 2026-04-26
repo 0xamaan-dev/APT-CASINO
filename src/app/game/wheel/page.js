@@ -8,7 +8,7 @@ import { calculateResult } from "../../../lib/gameLogic";
 import Image from "next/image";
 // Using Next.js public asset reference instead of import
 import { motion } from "framer-motion";
-import { FaHistory, FaTrophy, FaInfoCircle, FaChartLine, FaCoins, FaChevronDown, FaPercentage, FaBalanceScale } from "react-icons/fa";
+import { FaHistory, FaTrophy, FaInfoCircle, FaChartLine, FaChevronDown, FaPercentage, FaBalanceScale } from "react-icons/fa";
 import { GiCardRandom, GiWheelbarrow, GiSpinningBlades, GiTrophyCup } from "react-icons/gi";
 import { HiOutlineTrendingUp, HiOutlineChartBar } from "react-icons/hi";
 import { useSelector, useDispatch } from 'react-redux';
@@ -686,7 +686,7 @@ export default function Home() {
 
                   <div className="flex flex-col items-center p-2 bg-black/20 rounded-lg">
                     <div className="flex items-center justify-center w-8 h-8 rounded-full bg-green-600/20 mb-1">
-                      <FaCoins className="text-yellow-400" />
+                      <Image src="/logos/initia.png" alt="INIT" width={20} height={20} className="object-contain" />
                     </div>
                     <div className="text-xs text-white/50 font-sans text-center">Volume</div>
                     <div className="text-white font-display text-sm md:text-base">{gameStatistics.totalVolume}</div>

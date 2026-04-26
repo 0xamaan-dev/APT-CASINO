@@ -6,6 +6,7 @@ import { defineChain } from 'viem';
 export const initiaTestnet = defineChain({
   id: 2124225178762456,
   name: 'Initia EVM Testnet',
+  iconUrl: '/logos/initia.png',
   nativeCurrency: {
     decimals: 18,
     name: 'INIT',

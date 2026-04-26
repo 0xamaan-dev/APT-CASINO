@@ -12,6 +12,7 @@ import {
   interwovenKitStyles,
 } from "@/config/interwovenKit";
 import { initiaTestnet } from "@/config/chains";
+import { getInitiaChainIconUrls } from "@/utils/networkUtils";
 import { WalletStatusProvider } from "@/hooks/useWalletStatus";
 import WalletConnectionGuard from "@/components/WalletConnectionGuard";
 
@@ -54,6 +55,7 @@ function NetworkGuard({ children }) {
               nativeCurrency: { name: "INIT", symbol: "INIT", decimals: 18 },
               rpcUrls: ["https://jsonrpc-evm-1.anvil.asia-southeast.initia.xyz"],
               blockExplorerUrls: ["https://scan.testnet.initia.xyz/evm-1"],
+              iconUrls: getInitiaChainIconUrls(),
             },
           ],
         }).catch(() => {});
