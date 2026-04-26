@@ -1,32 +1,26 @@
-# 🎮 APT Casino — Initia-focused, provably fair
+# APT Casino
 
-Repository: [https://github.com/0xamaan-dev/APT-CASINO](https://github.com/0xamaan-dev/APT-CASINO)
+- **Repository:** [https://github.com/0xamaan-dev/APT-CASINO](https://github.com/0xamaan-dev/APT-CASINO)
+- **Pitch deck (Figma):** [APT Casino — Initia](https://www.figma.com/deck/MaNXzpdQG9Xu00r9LHuT1w/APT-Casino-Initia?node-id=1-1812&p=f&t=lw2ZfabwT0TwgRfK-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
 
-## Initia Hackathon Submission
+## Initia
 
 - **Project Name**: APT Casino
 
 ### Project Overview
 
-APT Casino is a provably fair, Initia-EVM–native casino: players connect with InterwovenKit-compatible wallets, play multiple games, and have rounds logged on-chain. The app targets web3 users who want transparent randomness (Pyth Entropy for server-side draws) and verifiable game history on **Initia EVM Testnet**, with treasury-backed UX for deposits and play.
+APT Casino is a provably fair, Initia casino: players connect with InterwovenKit-compatible wallets, play multiple games, and have rounds logged on-chain. The app targets web3 users who want transparent randomness (Pyth Entropy for server-side draws) and verifiable game history on **Initia Testnet**, with treasury-backed UX for deposits and play.
 
 ### Implementation Detail
 
 - **The Custom Implementation**: Game logic, UI, and APIs for roulette, mines, wheel, and plinko; on-chain **EVM** game logger (`InitiaGameLogger`); NFT metadata route; Supabase-backed history; server-side Pyth Entropy requests; and treasury/deposit/withdraw flows tailored to Initia testnet.
-- **The Native Feature**: **`auto-signing`** via **InterwovenKit** (`@initia/interwovenkit-react`). The app wraps the tree in `InterwovenKitProvider` (TESTNET) with `enableAutoSign`, uses **`initiaPrivyWalletConnector`** together with **injected** and **MetaMask** in wagmi, and exposes **`InitiaAutoSignControls`** in the navbar so users can enable or disable **auto-signing** on Initia L1’s default test chain (`initiation-2` / `TESTNET.defaultChainId`), reducing repeat signing prompts for supported Initia flows in line with the [InterwovenKit builder story](https://docs.initia.xyz/hackathon/builder-guide). EVM casino transactions continue to use **wagmi** on **Initia EVM Testnet** (chain id `2124225178762456`).
+- **The Native Feature**: **`auto-signing`** via **InterwovenKit** (`@initia/interwovenkit-react`). The app wraps the tree in `InterwovenKitProvider` (TESTNET) with `enableAutoSign`, uses **`initiaPrivyWalletConnector`** together with **injected** and **MetaMask** in wagmi, and exposes **`InitiaAutoSignControls`** in the navbar so users can enable or disable **auto-signing** on Initia L1’s default test chain (`initiation-2` / `TESTNET.defaultChainId`), reducing repeat signing prompts for supported Initia flows in line. EVM casino transactions continue to use **wagmi** on **Initia EVM Testnet** (chain id `2124225178762456`).
 
-**Smallest integration path (as implemented):**
+**Integration path (as implemented):**
 
 1. **`src/components/WalletProviders.js`** — `WagmiProvider` + `createConfig` with `[initiaPrivyWalletConnector, injected(), metaMask()]`; `InterwovenKitProvider` spread `{...TESTNET}` and `enableAutoSign`; `injectStyles(InterwovenKitStyles)` on mount; existing network guard unchanged for EVM.
 2. **`src/components/InitiaAutoSignControls.jsx`** — `useInterwovenKit().autoSign` to `enable` / `disable` on `TESTNET.defaultChainId` (L1 testnet used by the kit for session-style signing).
-3. **Why auto-signing for a casino** — High-frequency play matches the [BlockForge / auto-signing blueprint intent](https://docs.initia.xyz/hackathon/builder-guide): fewer interruptive wallet prompts for whitelisted Initia message flows while EVM game contracts stay on the Initia EVM RPC you configure in `.env`.
-4. **If you run your *own* rollup** via `weave` — Replace `rollup_chain_id` in `.initia/submission.json` with your appchain id from the CLI, update deployed addresses, and keep the Interwoven + EVM split consistent with that deployment.
-
-**Before you submit to DoraHacks / Initia**
-
-1. Run `git add -A && git commit -m "Your message"` then set `commit_sha` in `.initia/submission.json` to the output of `git rev-parse HEAD` (full 40 hex chars). Until the first commit, a placeholder of zeros is fine for local work only.
-2. Record a **1–3 minute** public **YouTube or Loom** demo and set `demo_video_url` in `.initia/submission.json` (and optionally `NEXT_PUBLIC_DEMO_VIDEO_URL` in `.env` for links in the app).
-3. Confirm with hackathon staff whether your target (**shared Initia EVM testnet** vs **self-rolled appchain** via [weave](https://docs.initia.xyz/hackathon/get-started)) satisfies the “own rollup / evidence” line item; adjust `rollup_chain_id` and evidence links as required.
+3. **Why auto-signing for a casino** — High-frequency play matches the BlockForge / auto-signing blueprint intent: fewer interruptive wallet prompts for whitelisted Initia message flows while EVM game contracts stay on the Initia EVM RPC you configure in `.env`.
 
 ### How to Run Locally
 
